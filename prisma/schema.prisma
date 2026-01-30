@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 Int              @id @default(autoincrement())
+  name               String
+  email              String           @unique
+  phone              String?
+  role               Role             @default(PATIENT)
+  password           String
+  profileImage       String?
+  createdAt          DateTime         @default(now())
+
+  appointments       Appointment[]    @relation("PatientAppointments")
+  doctorAppointments Appointment[]    @relation("DoctorAppointments")
+  notifications      Notification[]
+  blogs              Blog[]           @relation("BlogAuthor")
+  askAIHistories     AskAIHistory[]
+
+  // علاقات الحجز الجديدة
+  doctorBookings     Booking[]        @relation("DoctorBookings")
+  patientBookings    Booking[]        @relation("PatientBookings")
+
+  @@map("user")
+}
+
+model Appointment {
+  id        Int       @id @default(autoincrement())
+  date      DateTime
+  time      String
+  status    Status     @default(AVAILABLE)
+  notes     String?
+  createdAt DateTime   @default(now())
+
+  patient   User?      @relation("PatientAppointments", fields: [patientId], references: [id])
+  patientId Int?
+  patientName  String?  
+  patientPhone String?  
+  doctor    User       @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  doctorId  Int
+
+  @@map("appointment")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  title     String
+  message   String
+  appointmentId Int?
+  type      String?
+  isRead    Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+    @@unique([userId, appointmentId, type], name: "userId_appointmentId_type")
+    @@map("notification")
+}
+
+
+model Blog {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  image       String?
+  createdAt   DateTime  @default(now())
+
+  author      User      @relation("BlogAuthor", fields: [authorId], references: [id])
+  authorId    Int
+
+  @@map("blog")
+}
+
+model AskAIHistory {
+  id          Int       @id @default(autoincrement())
+  question    String
+  answer      String
+  createdAt   DateTime  @default(now())
+
+  user        User?     @relation(fields: [userId], references: [id])
+  userId      Int?
+
+  @@map("askaihistory")
+}
+
+model Booking {
+  id         Int      @id @default(autoincrement())
+  doctor     User     @relation("DoctorBookings", fields: [doctorId], references: [id])
+  doctorId   Int
+  patient    User     @relation("PatientBookings", fields: [patientId], references: [id])
+  patientId  Int
+  date       String
+  time       String
+  status     String   @default("pending")
+  createdAt  DateTime @default(now())
+
+  @@map("booking")
+}
+
+enum Role {
+  DOCTOR
+  PATIENT
+}
+
+enum Status {
+  AVAILABLE
+  PENDING
+  ACCEPTED
+  REJECTED
+}

@@ -1,0 +1,53 @@
+{
+  "name": "dental-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "db:push": "npx prisma db push",
+    "db:seed": "ts-node --transpile-only scripts/seed.ts",
+    "server": "nodemon backend/server.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.75.0",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.7.0",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.24",
+    "google-auth-library": "^10.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "leaflet": "^1.9.4",
+    "next": "15.5.4",
+    "nodemailer": "^7.0.9",
+    "openai": "^6.3.0",
+    "prisma": "^6.17.1",
+    "qrcode.react": "^4.2.0",
+    "react": "19.1.0",
+    "react-calendar": "^6.0.0",
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.5.0",
+    "react-leaflet": "^5.0.0",
+    "react-parallax-tilt": "^1.7.310"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.4",
+    "nodemon": "^3.1.10",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}
