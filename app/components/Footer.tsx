@@ -101,7 +101,7 @@ export default function Footer() {
 
       {/* Bottom line */}
       <div className="text-center text-sm mt-8 border-t border-white/20 pt-4">
-        &copy; {new Date().getFullYear()} Al-hayah clinic. All rights reserved.
+        &copy; {new Date().getFullYear()} Amany Ahmed. All rights reserved.
       </div>
     </footer>
   );
