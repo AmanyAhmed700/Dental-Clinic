@@ -1,3 +1,5 @@
+# Project Structure 
+
 my-app/
 ├── app/
 │   ├── api/
@@ -66,7 +68,6 @@ my-app/
 ├── lib/
 │   ├── supabaseClient.ts   
 │   ├── prisma.ts
-│   ├── cloudinary.ts
 │   ├── getUser.ts
 │   └── auth.ts
 │
@@ -88,3 +89,46 @@ my-app/
 ├── next.config.mjs
 ├── package.json
 
+
+
+# Al-Hayah Clinic – Full Stack Web App
+
+A complete full-stack web application for managing clinic operations, built with:
+
+- **Next.js 14 (App Router)**
+- **Prisma ORM**
+- **Supabase**
+- **TailwindCSS**
+- **JWT Authentication**
+- **Role-based Access (Doctor / Patient )**
+
+---
+
+##  Features
+
+###  Authentication
+- Register / Login
+- JWT-based authentication
+- Role-based routing
+
+###  Doctor Dashboard
+- View Patients
+- Manage Appointments
+- Blog Management
+- Calendar View
+- Notifications
+
+
+###  Patient Area
+- Book appointments
+- View booked sessions
+- Watch recorded sessions
+- Notifications
+
+       ---
+# Project Setup 
+npx create-next-app@latest
+cd my-app
+npm install @prisma/client prisma @supabase/supabase-js  react-icons react-hot-toast date-fns
+npm install -D nodemon
+npx prisma init
